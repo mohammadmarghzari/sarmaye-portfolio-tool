@@ -1,1 +1,75 @@
-# sarmaye-portfolio-tool
+# Portfolio360 (پورتفولیو ۳۶۰)
+
+اپلیکیشن شخصی تحلیل پرتفوی، اختیار معامله و ابزارهای بازار ایران — نوشته‌شده با **Kotlin Multiplatform + Compose Multiplatform**، برای **دسکتاپ (ویندوز/مک/لینوکس)** و **اندروید**.
+
+> این یک اپ کاملاً شخصی است و برای ارائه‌ی عمومی در نظر گرفته نشده.
+
+بازنویسی کامل نسخه‌ی اولیه‌ی Python/Streamlit همین پروژه (که در ریپوی [azmayeshi](https://github.com/mohammadmarghzari/azmayeshi) موجود است) با معماری بومی، UI حرفه‌ای Compose و نمودارهای اختصاصی.
+
+## امکانات
+
+همه‌ی ۱۶ بخش نسخه‌ی پایتون، با UI حرفه‌ای Compose و نمودارهای اختصاصی (Canvas-based) پیاده‌سازی شده‌اند:
+
+- **تخصیص پرتفوی** — بهینه‌سازی با ۶ روش (بیشترین شارپ، کمترین واریانس، مونت‌کارلو/CVaR، وزن برابر، ریسک پاریتی، بشکه‌ای طالب)، Pie و Treemap
+- **ریسک و بازده** — Sharpe، Calmar، CVaR، Max Drawdown، Underwater chart، هج با Protective Put
+- **نمودار قیمت** و ماتریس همبستگی
+- **مقایسه سبک‌ها** — مقایسه هر ۶ روش تخصیص در کنار هم
+- **Efficient Frontier** — شبیه‌سازی ۱۵۰۰ پرتفوی تصادفی + مرز کارایی + Rolling Sharpe
+- **اختیار پیشرفته** — Covered Call، Protective Put، Iron Condor، Rolling Covered Call
+- **Black-Litterman** — دیدگاه‌های شخصی + Factor Exposure
+- **Stress Test & Monte Carlo** — بازپخش ۶ بحران تاریخی + شبیه‌سازی ۴۰۰ مسیر آینده
+- **ری‌بالانس** و تشخیص رژیم همبستگی بازار
+- **Benchmark** — مقایسه با SPY/QQQ/BTC/... (آلفا، بتا، Tracking Error)
+- **داده زنده** — شاخص Fear & Greed، اخبار Yahoo Finance، Seasonality
+- **ذخیره پرتفوی**، **هشدار قیمت/Fear&Greed**
+- **ابزار ایران** — نرخ واقعی دلار (تورم/طلا)، حباب گواهی سپرده کالایی، P&L هدف قیمتی
+- **اختیار بورس کالا** — قیمت‌گذاری Black-Scholes، IV Solver، ۶ استراتژی ترکیبی، Option Chain، چک‌لیست معامله
+- **IME Live** — تابلوی زنده گواهی سپرده کالایی، دفتر سفارشات، نمودار شمعی، رادار مقایسه، تحلیل‌گر سیگنال
+
+## معماری پروژه
+
+```
+core/          ماژول Kotlin/JVM خالص — تمام فرمول‌های مالی + شبکه (بدون UI)
+  math/        بهینه‌سازی پرتفوی، Black-Scholes، Black-Litterman، Monte Carlo، ...
+  network/     کلاینت‌های Ktor برای Yahoo Finance، CNN Fear&Greed، RSS اخبار، IME API
+  model/       مدل‌های داده مشترک
+composeApp/    اپ Kotlin Multiplatform (Compose) — کد UI مشترک بین دسکتاپ و اندروید
+  commonMain/  تم، نمودارهای اختصاصی (Canvas)، ۱۶ صفحه، ناوبری تطبیقی
+  androidMain/ نقطه‌ورود اندروید (MainActivity)
+  desktopMain/ نقطه‌ورود دسکتاپ (Compose Desktop window)
+```
+
+## اجرا روی دسکتاپ
+
+```bash
+./gradlew :composeApp:run
+```
+
+برای ساخت نصب‌کننده‌ی بومی (dmg/msi/deb):
+
+```bash
+./gradlew :composeApp:createDistributable
+```
+
+## اجرا روی اندروید
+
+پروژه را در **Android Studio** باز کنید و روی یک دستگاه/شبیه‌ساز اجرا کنید، یا از خط فرمان:
+
+```bash
+./gradlew :composeApp:assembleDebug
+```
+
+فایل APK در `composeApp/build/outputs/apk/debug/` ساخته می‌شود. این بیلد در GitHub Actions (`.github/workflows/build.yml`) روی هر پوش به‌صورت خودکار تست می‌شود.
+
+## تست ماژول اصلی
+
+```bash
+./gradlew :core:test
+```
+
+## پشته فناوری
+
+Kotlin 2.0 · Compose Multiplatform 1.7 · Ktor Client (CIO) · kotlinx.coroutines / serialization / datetime
+
+---
+ساخته شده با ❤️ توسط محمد مرغزاری — بازنویسی‌شده با Claude
