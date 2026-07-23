@@ -79,7 +79,8 @@ Default Project Skill:
 
 The master skill at .claude/skills/portfolio360-master/ (SKILL.md + CLAUDE.md +
 examples.md + checklist.md) is the default for every task in this repository and
-binds the principles above to the actual Kotlin Multiplatform architecture
+binds the principles above to the actual Kotlin Multiplatform architecture; for
+primarily visual work also load .claude/skills/portfolio360-ui/
 (core/data/state/ui layers, design system, UiState framework, devpreview compile
 sandbox, mirrored-repo delivery pipeline). Note: earlier references to
 NumPy/Pandas/Plotly and Flutter describe the retired Python prototype; the live
