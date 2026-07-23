@@ -71,3 +71,16 @@ After modification:
 1. Summarize changes.
 2. Report risks.
 3. Suggest improvements.
+
+
+---
+
+Default Project Skill:
+
+The master skill at .claude/skills/portfolio360-master/ (SKILL.md + CLAUDE.md +
+examples.md + checklist.md) is the default for every task in this repository and
+binds the principles above to the actual Kotlin Multiplatform architecture
+(core/data/state/ui layers, design system, UiState framework, devpreview compile
+sandbox, mirrored-repo delivery pipeline). Note: earlier references to
+NumPy/Pandas/Plotly and Flutter describe the retired Python prototype; the live
+stack is Kotlin + Compose Multiplatform with the custom charts/ toolkit.
